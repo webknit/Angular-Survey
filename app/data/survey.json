@@ -1,0 +1,27 @@
+{
+  "title": "A sample Survey",
+  "questions": [
+  	{
+  		"id": 1,
+  		"conditional": false,
+  		"questionText": "What is your favourite language",
+  		"options": [
+  			"javascript",
+  			"HTML",
+  			"CSS",
+  			"Other"
+  		]
+  	},
+  	{
+  		"id": 2,
+  		"conditional": false,
+  		"questionText": "What is your most hated language",
+  		"options": [
+  			"javascript",
+  			"HTML",
+  			"CSS",
+  			"Other"
+  		]
+  	}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "1": {
+	"javascript": 40,
+	"HTML": 20,
+	"CSS": 30,
+	"Other": 10
+  },
+  "2": {
+	"javascript": 50,
+	"HTML": 10,
+	"CSS": 20,
+	"Other": 20
+  }
+}
