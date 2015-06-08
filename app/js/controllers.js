@@ -48,30 +48,53 @@ angular.module('treehouseCourse.controllers', [])
       var questions = $scope.survey.questions;
       var filtered = [];
 
-      
+      // Loop through questions
       for (var i = 0, ii = questions.length; i < ii; i++) {
-        var question = questions[i];
-        // Example conditional: "user.ageRange == '20-29'"
-        if (!question.conditional || $scope.$eval(question.conditional)) {
-          filtered.push(question);
-        };
+		var question = questions[i];
+		// If the question isn't conditonal add it to array
+		// The $scope.$eval compares the conditional statements as defined in services
+		// Example conditional: "user.ageRange == '20-29'"
+		if (!question.conditional || $scope.$eval(question.conditional)) {
+			filtered.push(question);
+		};
       }
+      
+      // return the array
       return filtered;
+      
     }
 
   })
 
 
-.controller('resultsStepCtrl', function ($scope, User, Results) {
-var user = User.get();
-var questionIds = _.keys(user.surveyAnswers);
-$scope.surveyResults = Results.forQuestions(questionIds);
-})
-.controller('debugCtrl', function ($scope, User, Results) {
-$scope.user = angular.isDefined(User.get) && User.get();
-
-$scope.$watch('user.surveyAnswers', function () {
-var questionIds = _.keys($scope.user.surveyAnswers);
-$scope.results = angular.isDefined(Results.forQuestions) && Results.forQuestions(questionIds);
-}, true);
-})
+	.controller('resultsStepCtrl', function ($scope, User, Results) {
+	
+			var user = User.get();
+			
+			// _keys uses underscore
+			// Retrieve all the names of the object's own enumerable properties.
+			// _.keys({one: 1, two: 2, three: 3});
+			// => ["one", "two", "three"]
+			var questionIds = _.keys(user.surveyAnswers);
+			// Adding to the scope
+			$scope.surveyResults = Results.forQuestions(questionIds);
+			
+			
+	})
+	
+	// Thsi watches the debug controller and outputs the results
+	.controller('debugCtrl', function ($scope, User, Results) {
+	
+		// angular.isDefined check si soemthing is truely defined
+		$scope.user = angular.isDefined(User.get) && User.get();
+	
+		
+		// Watch survey results if it changes then change
+		$scope.$watch('user.surveyAnswers', function () {
+		
+			var questionIds = _.keys($scope.user.surveyAnswers);
+			$scope.results = angular.isDefined(Results.forQuestions) && Results.forQuestions(questionIds);
+			
+		}, true);
+		
+	})
